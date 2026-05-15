@@ -43,9 +43,9 @@ movecursor:
 	mov bp, sp
 	pusha
 
-	mov dx, [bp+4] 		; get the argument from the stack. |bp| = 2, |arg| = 2
-	mov ah, 02h 		; set cursor position
-	mov bh, 00h		; page 0 - doesn't matter, we're not using double-buffering
+	mov dx, [bp+4] 		;
+	mov ah, 02h 		; 
+	mov bh, 00h		
 	int 10h
 
 	popa
@@ -57,17 +57,17 @@ print:
 	push bp
 	mov bp, sp
 	pusha
-	mov si, [bp+4]	 	; grab the pointer to the data
-	mov bh, 00h	        ; page number, 0 again
-	mov bl, 00h		; foreground color, irrelevant - in text mode
-	mov ah, 0Eh  		; print character to TTY
+	mov si, [bp+4]	 	
+	mov bh, 00h	       
+	mov bl, 00h		
+	mov ah, 0Eh  	
  .char:
-	mov al, [si]   		; get the current char from our pointer position
-	add si, 1		; keep incrementing si until we see a null char
+	mov al, [si]   		
+	add si, 1		
 	or al, 0
-	je .return        	; end if the string is done
-	int 10h         	; print the character if we're not done
-	jmp .char	  	; keep looping
+	je .return        	
+	int 10h         	
+	jmp .char	  	
  .return:
 	popa
 	mov sp, bp
@@ -75,7 +75,7 @@ print:
 	ret
 
 
-msg:	db "Oh boy do I sure love assembly!", 0
+msg:	db " love assembly!", 0
 
 	times 510-($-$$) db 0
 	dw 0xAA55
